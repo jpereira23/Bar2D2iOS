@@ -8,57 +8,36 @@
 
 import UIKit
 
-class NewDrinkViewController: UIViewController {
-
-    @IBOutlet weak var drinkName: UITextField!
-    @IBOutlet weak var slotOne: UITextField!
-    @IBOutlet weak var slotTwo: UITextField!
-    @IBOutlet weak var slotThree: UITextField!
-    @IBOutlet weak var slotFour: UITextField!
-    @IBOutlet weak var slotFive: UITextField!
-    @IBOutlet weak var slotSix: UITextField!
-    @IBOutlet weak var slotSeven: UITextField!
-    @IBOutlet weak var slotEight: UITextField!
-    @IBOutlet weak var slotNine: UITextField!
-    @IBOutlet weak var slotTen: UITextField!
-    @IBOutlet weak var slotEleven: UITextField!
-    @IBOutlet weak var slotTwelve: UITextField!
-    @IBOutlet weak var slotThirteen: UITextField!
-    @IBOutlet weak var slotFourteen: UITextField!
-    @IBOutlet weak var slotFifteen: UITextField!
+class NewDrinkViewController: UIViewController, UITextFieldDelegate {
     
     let coreDataHelper = CoreDataHelper()
     
     
+    @IBOutlet weak var drinkName: UITextField!
+    @IBOutlet weak var tableView: UITableView!
+    var arrayOfSlots: [String] = ["Slot One", "Slot Two", "Slot Three", "Slot Four", "Slot Five" , "Slot Six", "Slot Seven", "Slot Eight", "Slot Nine", "Slot Ten", "Slot Eleven", "Slot Twelve", "Slot Thirteen", "Slot Fourteen", "Slot Fifteen"]
+    var arrayOfValues: [Int] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        drinkName.delegate = self
         // Do any additional setup after loading the view.
     }
     
     @IBAction func addDrink(_ sender: Any) {
         var aDrinkName = drinkName.text
-        var arrayOfSlots: [Int] = []
-        arrayOfSlots.append(slotOne!.text)
-        arrayOfSlots.append(slotTwo!.text)
-        arrayOfSlots.append(slotThree!.text)
-        arrayOfSlots.append(slotFour!.text)
-        arrayOfSlots.append(slotFive!.text)
-        arrayOfSlots.append(slotSix!.text)
-        arrayOfSlots.append(slotSeven!.text)
-        arrayOfSlots.append(slotEight!.text)
-        arrayOfSlots.append(slotNine!.text)
-        arrayOfSlots.append(slotTen!.text)
-        arrayOfSlots.append(slotEleven!.text)
-        arrayOfSlots.append(slotTwelve!.text)
-        arrayOfSlots.append(slotThirteen!.text)
-        arrayOfSlots.append(slotFourteen!.text)
-        arrayOfSlots.append(slotFifteen!.text)
-        let aDrink = DrinkClass(name: aDrinkName!, slots: arrayOfSlots)
+    
+        let aDrink = DrinkClass(name: aDrinkName!, slots: arrayOfValues)
         
-        CoreDataHelper.saveDrink(aDrink)
+        coreDataHelper.saveDrink(drink: aDrink)
         
         self.dismiss(animated: true, completion: nil)
+    }
+
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        drinkName.resignFirstResponder()
+        
+        return true
     }
     
     
@@ -73,4 +52,24 @@ class NewDrinkViewController: UIViewController {
     }
     */
 
+}
+
+extension NewDrinkViewController: UITableViewDelegate, UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 15
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "aCell") as! CreateDrinkTableViewCell
+        cell.slotText.text = arrayOfSlots[indexPath.row]
+        cell.index = indexPath.row
+        cell.aDelegate = self
+        return cell
+    }
+}
+
+extension NewDrinkViewController: CreateDrinkTableViewCellDelegate{
+    func valueChanged(index: Int, value: Int){
+        arrayOfValues[index] = value
+    }
 }

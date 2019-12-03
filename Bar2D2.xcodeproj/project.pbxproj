@@ -19,6 +19,8 @@
 		201B5118236A64930078121F /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201B5117236A64930078121F /* Drink.swift */; };
 		201B511A236A65070078121F /* NewDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201B5119236A65070078121F /* NewDrinkViewController.swift */; };
 		201B511C236A659E0078121F /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201B511B236A659E0078121F /* CoreDataHelper.swift */; };
+		203378B2238076B500BB5DC1 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203378B1238076B500BB5DC1 /* CustomTableViewCell.swift */; };
+		20FB16952384D1BB0038B178 /* CreateDrinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FB16942384D1BB0038B178 /* CreateDrinkTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		201B5117236A64930078121F /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		201B5119236A65070078121F /* NewDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDrinkViewController.swift; sourceTree = "<group>"; };
 		201B511B236A659E0078121F /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		203378B1238076B500BB5DC1 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		20FB16942384D1BB0038B178 /* CreateDrinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDrinkTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 			children = (
 				201B50E4236A5FEF0078121F /* AppDelegate.swift */,
 				201B50E6236A5FEF0078121F /* SceneDelegate.swift */,
+				203378B1238076B500BB5DC1 /* CustomTableViewCell.swift */,
+				20FB16942384D1BB0038B178 /* CreateDrinkTableViewCell.swift */,
 				201B5117236A64930078121F /* Drink.swift */,
 				201B50E8236A5FEF0078121F /* ViewController.swift */,
 				201B5119236A65070078121F /* NewDrinkViewController.swift */,
@@ -272,7 +278,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				201B50EF236A5FEF0078121F /* Bar2D2.xcdatamodeld in Sources */,
+				20FB16952384D1BB0038B178 /* CreateDrinkTableViewCell.swift in Sources */,
 				201B50E9236A5FEF0078121F /* ViewController.swift in Sources */,
+				203378B2238076B500BB5DC1 /* CustomTableViewCell.swift in Sources */,
 				201B511A236A65070078121F /* NewDrinkViewController.swift in Sources */,
 				201B511C236A659E0078121F /* CoreDataHelper.swift in Sources */,
 				201B50E5236A5FEF0078121F /* AppDelegate.swift in Sources */,
@@ -451,15 +459,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BEPL73VPNG;
 				INFOPLIST_FILE = Bar2D2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Bar2D2.iOSapp.Bar2D2;
+				MARKETING_VERSION = 1.5;
+				PRODUCT_BUNDLE_IDENTIFIER = Jeff.Bar2D2.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -468,15 +478,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BEPL73VPNG;
 				INFOPLIST_FILE = Bar2D2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Bar2D2.iOSapp.Bar2D2;
+				MARKETING_VERSION = 1.5;
+				PRODUCT_BUNDLE_IDENTIFIER = Jeff.Bar2D2.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
