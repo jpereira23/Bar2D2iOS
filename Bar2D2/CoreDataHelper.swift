@@ -14,9 +14,11 @@ class CoreDataHelper{
     private var appDelegate = UIApplication.shared.delegate as! AppDelegate
     private var managedContext: NSManagedObjectContext!
     private var drinkEntity: NSEntityDescription!
+    private var userEntity: NSEntityDescription!
     init(){
         self.managedContext = self.appDelegate.persistentContainer.viewContext
         self.drinkEntity = NSEntityDescription.entity(forEntityName: "Drink", in: self.managedContext)
+        self.userEntity = NSEntityDescription.entity(forEntityName: "User", in: self.managedContext)
     }
     
     public func saveDrink(drink: DrinkClass){
@@ -48,6 +50,56 @@ class CoreDataHelper{
             NSLog(error.localizedDescription)
         }
         
+    }
+    
+    public func saveUser(username: String, isAdmin: Bool, botID: String){
+        let theUser = NSManagedObject(entity: self.userEntity!, insertInto: self.managedContext)
+        theUser.setValue(username, forKey: "username")
+        theUser.setValue(botID, forKey: "botID")
+        theUser.setValue(isAdmin, forKey: "isAdmin")
+        
+        do{
+            try self.managedContext.save()
+        } catch let error as NSError{
+            NSLog(error.localizedDescription)
+        }
+        
+    }
+    
+    public func getUser() -> UserClass{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
+        var managedUsers = [NSManagedObject]()
+        do{
+            managedUsers = []
+            managedUsers = try self.managedContext!.fetch(fetchRequest)
+        } catch let error as NSError {
+            NSLog(error.localizedDescription)
+        }
+        
+        let username = managedUsers[0].value(forKey: "username") as! String
+        let botID = managedUsers[0].value(forKey: "botID") as! String
+        let isAdmin = managedUsers[0].value(forKey: "isAdmin") as! Bool
+        
+        let aUser: UserClass = UserClass(iA: isAdmin, un: username, bI: botID)
+        
+        return aUser
+    }
+    
+    public func isUsers() -> Bool{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
+        var managedUsers = [NSManagedObject]()
+        do{
+            managedUsers = []
+            managedUsers = try self.managedContext!.fetch(fetchRequest)
+        } catch let error as NSError {
+            NSLog(error.localizedDescription)
+        }
+        
+        if managedUsers.count > 0{
+            return true
+        }
+        
+        return false
     }
     
     public func getDrinks() -> [DrinkClass]{
@@ -105,5 +157,25 @@ class CoreDataHelper{
         }
         
         return tmpDrinks
+    }
+    
+    public func resetCoreData(){
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Drink")
+        let request = NSBatchDeleteRequest(fetchRequest: fetch)
+        
+        do {
+            _ = try self.managedContext.execute(request)
+        } catch let error as NSError {
+            print("Could not save. \(error). \(error.userInfo)")
+        }
+        
+        let fetch1 = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        let request1 = NSBatchDeleteRequest(fetchRequest: fetch1)
+        
+        do {
+            _ = try self.managedContext.execute(request1)
+        } catch let error as NSError {
+            print("Could not save. \(error). \(error.userInfo)")
+        }
     }
 }
